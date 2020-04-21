@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Next主题配置内容," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="nexT配置（无序） 收集到哪记录到哪1.主题简单配置就省略了 （有官方文档）2.添加博客自定义图标 在主题配置文件thems&#x2F;next&#x2F;sources&#x2F;images目录下，并在 主题配置文件中进行配置（选择或者创建相应大小的图标文件）：  只需要设置small和medium两个就可以;   12345favicon:  small: &#x2F;images&#x2F;16×16.png  medium: &#x2F;ima">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Next配置">
+<meta property="og:url" content="http://yoursite.com/2020/02/04/next%E9%85%8D%E7%BD%AE/index.html">
+<meta property="og:site_name" content="恋卿">
+<meta property="og:description" content="nexT配置（无序） 收集到哪记录到哪1.主题简单配置就省略了 （有官方文档）2.添加博客自定义图标 在主题配置文件thems&#x2F;next&#x2F;sources&#x2F;images目录下，并在 主题配置文件中进行配置（选择或者创建相应大小的图标文件）：  只需要设置small和medium两个就可以;   12345favicon:  small: &#x2F;images&#x2F;16×16.png  medium: &#x2F;ima">
+<meta property="article:published_time" content="2020-02-04T02:25:16.000Z">
+<meta property="article:modified_time" content="2020-02-10T02:01:42.784Z">
+<meta property="article:author" content="卿恋佳人">
+<meta property="article:tag" content="Next主题配置内容">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/02/04/next配置/"/>
+
+
+
+
+
+  <title>Next配置 | 恋卿</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">恋卿</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">记录点滴</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/04/next%E9%85%8D%E7%BD%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="卿恋佳人">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="恋卿">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Next配置</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-04T10:25:16+08:00">
+                2020-02-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/NexT%E9%85%8D%E7%BD%AE/" itemprop="url" rel="index">
+                    <span itemprop="name">NexT配置</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="nexT配置（无序）-收集到哪记录到哪"><a href="#nexT配置（无序）-收集到哪记录到哪" class="headerlink" title="nexT配置（无序） 收集到哪记录到哪"></a>nexT配置（无序） 收集到哪记录到哪</h1><h2 id="1-主题简单配置就省略了-（有官方文档）"><a href="#1-主题简单配置就省略了-（有官方文档）" class="headerlink" title="1.主题简单配置就省略了 （有官方文档）"></a>1.主题简单配置就省略了 （有官方文档）</h2><h2 id="2-添加博客自定义图标"><a href="#2-添加博客自定义图标" class="headerlink" title="2.添加博客自定义图标"></a>2.添加博客自定义图标</h2><blockquote>
+<p>在<strong>主题配置</strong>文件thems/next/sources/images目录下，并在 <strong>主题配置</strong>文件中进行配置（选择或者创建相应大小的图标文件）：</p>
+<blockquote>
+<p>只需要设置small和medium两个就可以;</p>
+</blockquote>
+</blockquote>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">favicon</span>:</span><br><span class="line">  small: /images/16×16.png</span><br><span class="line">  medium: /images/32×32.png</span><br><span class="line">  apple_touch_icon: /images/128×a128.png</span><br><span class="line">  safari_pinned_tab: /images/logo2.svg</span><br></pre></td></tr></table></figure>
+<h2 id="3-hexo修改文章底部的那个带-号的标签："><a href="#3-hexo修改文章底部的那个带-号的标签：" class="headerlink" title="3.hexo修改文章底部的那个带 # 号的标签："></a>3.hexo修改文章底部的那个带 <strong>#</strong> 号的标签：</h2><h3 id="具体实现方法："><a href="#具体实现方法：" class="headerlink" title="具体实现方法："></a>具体实现方法：</h3><blockquote>
+<p>修改 <strong>主题配置文件</strong> /thems/next/layout/_macro/post.swig,搜索 rel=”tag”&gt;#,将 # 换成</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;i class&#x3D;&quot;fa fa-tag&quot;&gt;&lt;&#x2F;i&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="4-设置作者头像为圆形（不设置鼠标移停自动旋转）"><a href="#4-设置作者头像为圆形（不设置鼠标移停自动旋转）" class="headerlink" title="4.设置作者头像为圆形（不设置鼠标移停自动旋转）"></a>4.设置作者头像为圆形（不设置鼠标移停自动旋转）</h2><h3 id="具体设置如下："><a href="#具体设置如下：" class="headerlink" title="具体设置如下："></a>具体设置如下：</h3><blockquote>
+<p>打开 <strong>主题配置</strong>文件 themes/next/source/css/_common/components/sidebar/sidebar-author.syl文件，修改如下代码：</p>
+</blockquote>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.site-author-image</span>&#123;</span><br><span class="line">  <span class="attribute">display</span>: block;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">0</span> auto;</span><br><span class="line">  <span class="attribute">padding</span>: $site-author-image-padding;</span><br><span class="line">  <span class="attribute">max-width</span>: $site-author-image-width;</span><br><span class="line">  <span class="attribute">height</span>: $site-author-image-height;</span><br><span class="line">  <span class="attribute">border</span>: $site-author-image-border-width solid $site-author-image-border-color;</span><br><span class="line">  //修改头像边框  添加以下代码就行；</span><br><span class="line">  <span class="selector-tag">border-radius</span>: 50%;</span><br><span class="line">  <span class="selector-tag">-webkit-border-radius</span>: 50%;</span><br><span class="line">  <span class="selector-tag">-moz-border-radius</span>: 50%;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="5-删除Hexo博客底部页脚："><a href="#5-删除Hexo博客底部页脚：" class="headerlink" title="5.删除Hexo博客底部页脚："></a>5.删除Hexo博客底部页脚：</h2><blockquote>
+<p>找到/thems/next/layout/_partials/footer.swig文件</p>
+<blockquote>
+<p>删除class为powered-by的div和theme-info的div即可</p>
+</blockquote>
+</blockquote>
+<h2 id="6-成功安装Node-js，Git，与Hexo后，用以下命令查看相应版本：-在黑窗口查看"><a href="#6-成功安装Node-js，Git，与Hexo后，用以下命令查看相应版本：-在黑窗口查看" class="headerlink" title="6.成功安装Node.js，Git，与Hexo后，用以下命令查看相应版本： (在黑窗口查看)"></a>6.成功安装Node.js，Git，与Hexo后，用以下命令查看相应版本： (在黑窗口查看)</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">查看node版本：</span><br><span class="line">$ node -v</span><br><span class="line"></span><br><span class="line">查看npm版本：</span><br><span class="line">$ npm -v</span><br><span class="line"></span><br><span class="line">查看git版本：</span><br><span class="line">$ git --version</span><br><span class="line"></span><br><span class="line">查看hexo版本:</span><br><span class="line">$ hexo --version</span><br><span class="line"></span><br><span class="line">查看next使用版本：</span><br><span class="line">主题配置文件_config.yml里面就有，在里面搜索version就行，新版本若没有就去主题文件的package.json的version；</span><br></pre></td></tr></table></figure>
+<h2 id="7-调整hexo页面的宽度："><a href="#7-调整hexo页面的宽度：" class="headerlink" title="7.调整hexo页面的宽度："></a>7.调整hexo页面的宽度：</h2><p>博客在浏览器的留白太多，要增加文章的宽度。仅针对于Pisces主题修改；</p>
+<blockquote>
+<p>打开/hexo/themes/next/source/css/_variables/custom.styl添加两行代码即可</p>
+</blockquote>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$main-desktop = 1200px</span><br><span class="line">$content-desktop = 900px</span><br></pre></td></tr></table></figure>
+<h2 id="8-next主题美化之显示当前浏览进度"><a href="#8-next主题美化之显示当前浏览进度" class="headerlink" title="8.next主题美化之显示当前浏览进度"></a>8.next主题美化之显示当前浏览进度</h2><blockquote>
+<p>打开thems/next/_config.yml，搜索关键字<strong>scrollpercent</strong>把false改为true；如下代码：</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Scroll percent label in b2t button</span></span><br><span class="line">scrollpercent: true</span><br></pre></td></tr></table></figure>
+<h2 id="9-next主题自定义头部标题背景变色与背景图案："><a href="#9-next主题自定义头部标题背景变色与背景图案：" class="headerlink" title="9.next主题自定义头部标题背景变色与背景图案："></a>9.next主题自定义头部标题背景变色与背景图案：</h2><blockquote>
+<p>打开themes/next/source/css/_custom/custom.styl，在里面添加如下代码：</p>
+</blockquote>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.site-meta</span> &#123;</span><br><span class="line"><span class="attribute">background</span>: $blue;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>头部区域背景图就变成蓝色了；</p>
+<hr>
+<p><strong>还可以自定义头部区域背景图：</strong></p>
+<blockquote>
+<p>找到themes\next\source\css\_custom\custom/.styl文件，添加如下代码：</p>
+</blockquote>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.site-meta</span> &#123;</span><br><span class="line">  <span class="attribute">background-image</span>: <span class="built_in">url</span>(/images/log-big.jpg);</span><br><span class="line">  @media(min-width: 992px)&#123;</span><br><span class="line">    background-image: url(/images/log-small.jpg);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>log-big.jpg也可以是其它名字。log-big.jpg的大小为992×112，log-small.jpg的大小为240×112，大了只能显示部分，小了可以重复铺满。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Next%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE%E5%86%85%E5%AE%B9/" rel="tag"><i class="fa fa-tag"></i> Next主题配置内容</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/02/10/MarkDown%E8%AF%AD%E6%B3%95%E5%AD%A6%E4%B9%A0/" rel="prev" title="MarkDown语法学习">
+                MarkDown语法学习 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="卿恋佳人" />
+            
+              <p class="site-author-name" itemprop="name">卿恋佳人</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7Carchive">
+              
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#nexT配置（无序）-收集到哪记录到哪"><span class="nav-number">1.</span> <span class="nav-text">nexT配置（无序） 收集到哪记录到哪</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-主题简单配置就省略了-（有官方文档）"><span class="nav-number">1.1.</span> <span class="nav-text">1.主题简单配置就省略了 （有官方文档）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-添加博客自定义图标"><span class="nav-number">1.2.</span> <span class="nav-text">2.添加博客自定义图标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-hexo修改文章底部的那个带-号的标签："><span class="nav-number">1.3.</span> <span class="nav-text">3.hexo修改文章底部的那个带 # 号的标签：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#具体实现方法："><span class="nav-number">1.3.1.</span> <span class="nav-text">具体实现方法：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-设置作者头像为圆形（不设置鼠标移停自动旋转）"><span class="nav-number">1.4.</span> <span class="nav-text">4.设置作者头像为圆形（不设置鼠标移停自动旋转）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#具体设置如下："><span class="nav-number">1.4.1.</span> <span class="nav-text">具体设置如下：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-删除Hexo博客底部页脚："><span class="nav-number">1.5.</span> <span class="nav-text">5.删除Hexo博客底部页脚：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-成功安装Node-js，Git，与Hexo后，用以下命令查看相应版本：-在黑窗口查看"><span class="nav-number">1.6.</span> <span class="nav-text">6.成功安装Node.js，Git，与Hexo后，用以下命令查看相应版本： (在黑窗口查看)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-调整hexo页面的宽度："><span class="nav-number">1.7.</span> <span class="nav-text">7.调整hexo页面的宽度：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-next主题美化之显示当前浏览进度"><span class="nav-number">1.8.</span> <span class="nav-text">8.next主题美化之显示当前浏览进度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-next主题自定义头部标题背景变色与背景图案："><span class="nav-number">1.9.</span> <span class="nav-text">9.next主题自定义头部标题背景变色与背景图案：</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">卿恋佳人</span>
+
+  
+</div>
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
