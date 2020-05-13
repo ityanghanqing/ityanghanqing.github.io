@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Java常用类学习," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="线程体系学习并行与并发: 并行: 指两个或多个事件在同一个时刻发生并发: 指两个或多个事件在同一个时间段内发生">
+<meta property="og:type" content="article">
+<meta property="og:title" content="线程体系">
+<meta property="og:url" content="http://yoursite.com/2020/05/13/%E7%BA%BF%E7%A8%8B%E4%BD%93%E7%B3%BB/index.html">
+<meta property="og:site_name" content="恋卿">
+<meta property="og:description" content="线程体系学习并行与并发: 并行: 指两个或多个事件在同一个时刻发生并发: 指两个或多个事件在同一个时间段内发生">
+<meta property="article:published_time" content="2020-05-13T09:51:00.000Z">
+<meta property="article:modified_time" content="2020-05-13T11:09:32.323Z">
+<meta property="article:author" content="卿恋佳人">
+<meta property="article:tag" content="Java常用类学习">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/05/13/线程体系/"/>
+
+
+
+
+
+  <title>线程体系 | 恋卿</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">恋卿</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">记录点滴</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/13/%E7%BA%BF%E7%A8%8B%E4%BD%93%E7%B3%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="卿恋佳人">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="恋卿">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">线程体系</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-13T17:51:00+08:00">
+                2020-05-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaSe/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaSe</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="线程体系学习"><a href="#线程体系学习" class="headerlink" title="线程体系学习"></a>线程体系学习</h1><h2 id="并行与并发"><a href="#并行与并发" class="headerlink" title="并行与并发:"></a>并行与并发:</h2><blockquote>
+<p>并行: 指两个或多个事件在同一个时刻发生<br>并发: 指两个或多个事件在同一个时间段内发生   </p>
+</blockquote>
+<a id="more"></a>
+<h2 id="进程与线程"><a href="#进程与线程" class="headerlink" title="进程与线程"></a>进程与线程</h2><blockquote>
+<p>&emsp;进程: 指在一个内存中运行的程序,每个进程都有一个独立的内存空间 ,一个应用程序可以同时运行多个进程,进程也是程序的一次执行过程,是系统运行程序的基本单位,系统运行一个程序也就是一个进程从创建 ,运行到消亡的过程;<br>&emsp;线程:  进程中的一个执行单元,负责当前进程中程序的执行,一个进程中至少有一个线程,一个进程中可以有多个线程的;   </p>
+</blockquote>
+<hr>
+<h2 id="进程与线程的区别"><a href="#进程与线程的区别" class="headerlink" title="进程与线程的区别:"></a>进程与线程的区别:</h2><blockquote>
+<p>&emsp;进程是有独立的内存空间,进程中的数据存放空间(堆空间和栈空间)是独立的,至少有一个线程;<br>&emsp;线程: 堆空间是共享的,栈空间是独立的,线程消耗的资源比进程小的多   </p>
+</blockquote>
+<hr>
+<h2 id="创建线程的常用方式"><a href="#创建线程的常用方式" class="headerlink" title="创建线程的常用方式"></a>创建线程的常用方式</h2><blockquote>
+<p>  创建线程的常用方式:<br>&emsp;一 :1.自定义Thread类的子类,也就是继承Thread类,并重写run()方法,该run方法的方法体就代表了线程需要完成的任务,因此把run()方法称为线程执行体<br>2.创建Thread子类的实例,即创建了线程对象<br>3.调用线程对象的start()方法来启动该线程<br>&emsp;二:实现Runnable接口,重写里面唯一的run()方法,具体看<strong>ImpRunnableTest类</strong>详解  </p>
+</blockquote>
+<hr>
+<pre><code class="java"><span class="keyword">package</span> com.ityang;
+
+<span class="comment">/**</span>
+<span class="comment"> * <span class="doctag">@Author</span> Qing-俺物语·杨</span>
+<span class="comment"> * <span class="doctag">@Date</span> 2020/5/12 22:42</span>
+<span class="comment"> * <span class="doctag">@Version</span> 1.0</span>
+<span class="comment"> */</span>
+
+<span class="comment">/**</span>
+<span class="comment"> * 第二种：</span>
+<span class="comment"> *   实现Runnable接口方式使用关键字implements实现Runnable接口，重写里面的run方法即可</span>
+<span class="comment"> *   详细步骤：</span>
+<span class="comment"> *      1.定义Runnable接口的实现类，并重写该接口的run（）方法，该run（）方法的方法体同样是该线程的线程执行体</span>
+<span class="comment"> *      2.创建Runnable实现类的实例，并以此实例作为Thread的tareget来创建Thread对象，该Thread对象才是真正的线程对象</span>
+<span class="comment"> *      3.调用线程对象的start（）方法来启动线程</span>
+<span class="comment"> */</span>
+<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ImpRunnableTest</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>{
+    <span class="meta">@Override</span>
+    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>{
+        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;<span class="number">10</span> ; i++) {
+            System.out.println(Thread.currentThread().getName() + <span class="string">" "</span> + i);
+
+        }
+    }
+}
+</code></pre>
+<hr>
+<h2 id="继承Thread类与实现Runnable接口区别"><a href="#继承Thread类与实现Runnable接口区别" class="headerlink" title="继承Thread类与实现Runnable接口区别:"></a>继承Thread类与实现Runnable接口区别:</h2><blockquote>
+<p>&emsp;1.最大的区别就是Runnable接口可以实现线程之间的资源共享,而Thread类不适合资源贡献<br>&emsp;2.避免了java中的单继承所带来的局限性;<br>&emsp;3.线程池中只能放入实现Runnable或Callable类的线程,不能直接方法继承Threa类在启动多线程的时候,需要先通过Thread类的构造方法Thread(Runnable target)构造出对象,然后调用Thread对象的start()方法来运行多线程的代码实际上所有的多线程代码都是通过运行Thread的start()方法来运行的,因此,不管继承Thread类还是实现Runnable接口来实现多线程,最终还是通过Thread的对象的API来控制线程的,熟悉Thread类的API是进行多线程编程的基础;   </p>
+</blockquote>
+<hr>
+<h2 id="start方法与run方法的区别"><a href="#start方法与run方法的区别" class="headerlink" title="start方法与run方法的区别:"></a>start方法与run方法的区别:</h2><blockquote>
+<p>&emsp;1.start()方法:用start()方法来启动线程,是真正实现了多线程,通过调用Thread类的start()方法来启动一个线程,此线程处于就绪(可运行)状态,并没有运行,一旦的到cpu时间片,就开始执行run()方法,但要注意的是,此时无需等待run()方法执行完毕,即可继续执行下面的代码,所以run()方法没有实现多线程<br>&emsp;2.run()方法只是类的一个普通方法,如果直接调用run方法,程序中依然只有主线程这一个线程,其程序执行路径还是只有一条,还是要顺序执行,还是要等待run方法体执行完毕后才可继续执行下面的代码  </p>
+</blockquote>
+<hr>
+<h2 id="线程的状态"><a href="#线程的状态" class="headerlink" title="线程的状态"></a>线程的状态</h2><blockquote>
+<p>线程的状态:<br>&emsp;1.创建(初始状态):<br>实现Runnable接口或者继承Thread类得到一个线程类, new一个实例,线程就进入了初始状态;<br>&emsp;2可运行(就绪):<br>也就是调用线程对象的start()方法 ,准备就绪,就等cpu给自己资源;<br>&emsp;3.运行:当线程获得CPU时间,线程才从可运行(就绪)进入到运行状态<br>&emsp;4.锁阻塞:当一个线程试图获取一个对象锁,而该对象锁被其他的线程持有,则该线程进入Blocked状态,当该线程持有锁时,该线程将变成运行状态<br>&emsp;5.无限等待:一个线程在等待另一个线程执行一个动作时,该线程进入Waiting状态,进入这个状态是不能自动唤醒的,必须等待另一个线程调用notify或者notifyAll方法才能够唤醒<br>&emsp;6.计时等待:也是进入waiting状态,带有超时参数的常用方法有Thread.sleep,Object.wait<br>&emsp;7.被终止(死亡):因为run方法正常退出而终止,或者因为没有捕获的异常终止了run方法而死亡  </p>
+</blockquote>
+<hr>
+<h2 id="sleep与wait区别"><a href="#sleep与wait区别" class="headerlink" title="sleep与wait区别:"></a>sleep与wait区别:</h2><blockquote>
+<p> sleep与wait的区别:<br>&emsp;1.来自不同的类 sleep方法是Thread类中的,wait是Object中的<br>&emsp;2.最主要的就是sleep方法没有释放锁,而wait方法释放了锁,使得其他线程可以使用同步控制块或者方法<br>&emsp;3.wait,notify 和notifyAll只能在同步控制方法或者同步控制块了面使用,而sleep可以在任何地方使用<br>&emsp;4.sleep必须捕获异常,而wait notify notifyAll不需要捕获异常  </p>
+</blockquote>
+<hr>
+<pre><code class="java"><span class="keyword">package</span> com.ityang;
+
+<span class="comment">/**</span>
+<span class="comment"> * <span class="doctag">@Author</span> Qing-俺物语·杨</span>
+<span class="comment"> * <span class="doctag">@Date</span> 2020/5/12 10:54</span>
+<span class="comment"> * <span class="doctag">@Version</span> 1.0</span>
+<span class="comment"> */</span>
+<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadTest</span> </span>{
+
+    <span class="comment">//主线程也是一个线程</span>
+    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{
+        <span class="comment">//创建自定义线程对象 使用继承Thread类的方式</span>
+        ThreadSonTest threadSonTest = <span class="keyword">new</span> ThreadSonTest(<span class="string">"新线程!!"</span>);
+        <span class="comment">//开启线程</span>
+        threadSonTest.start();
+        <span class="comment">/**</span>
+<span class="comment">         * 在main线程与自定义线程对象中，输出顺序是无序的，就看谁先得到cpu执行</span>
+<span class="comment">         */</span>
+        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) {
+            System.out.println(<span class="string">"main线程执行!"</span> + i);
+
+        }
+        <span class="comment">/**</span>
+<span class="comment">         * 使用实现Runnable接口的方法</span>
+<span class="comment">         */</span>
+        <span class="comment">//创建自定义对象</span>
+        ImpRunnableTest runnableTest = <span class="keyword">new</span> ImpRunnableTest();
+        <span class="comment">//创建线程对象</span>
+        Thread thread = <span class="keyword">new</span> Thread(runnableTest, <span class="string">"张三"</span>);
+        thread.start();
+
+
+    }
+
+}
+</code></pre>
+<hr>
+<h2 id="匿名内部类方式实现多线程"><a href="#匿名内部类方式实现多线程" class="headerlink" title="匿名内部类方式实现多线程:"></a>匿名内部类方式实现多线程:</h2><pre><code class="java"><span class="keyword">package</span> com.ityang;
+
+<span class="comment">/**</span>
+<span class="comment"> * <span class="doctag">@Author</span> Qing-俺物语·杨</span>
+<span class="comment"> * <span class="doctag">@Date</span> 2020/5/13 8:36</span>
+<span class="comment"> * <span class="doctag">@Version</span> 1.0</span>
+<span class="comment"> */</span>
+<span class="comment">/**</span>
+<span class="comment"> * 匿名内部类的方式实现线程</span>
+<span class="comment"> * 使用匿名内部类的方式实现Runnable接口,重写Runnable接口中的run方法</span>
+<span class="comment"> */</span>
+<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AnonymiytInnerThreadTtest</span> </span>{
+    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{
+        <span class="comment">/**</span>
+<span class="comment">         *</span>
+<span class="comment">         *</span>
+<span class="comment">         *     new Runnable(){</span>
+<span class="comment">         *         public void run(){</span>
+<span class="comment">         *             for(int i = 0;i&lt;20;i++){</span>
+<span class="comment">         *                 System.out.println("张三"+i);</span>
+<span class="comment">         *             }</span>
+<span class="comment">         *         }</span>
+<span class="comment">         *</span>
+<span class="comment">         *     }</span>
+<span class="comment">         */</span>
+
+        <span class="comment">//上面这个整体相当于  匿名内部类方式</span>
+        <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() {
+            <span class="meta">@Override</span>
+            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>{
+                <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">20</span>; i++) {
+
+                    System.out.println(<span class="string">"张三"</span> + i);
+                }
+            }
+        }).start();
+
+
+        <span class="comment">//使用Lambda表达式:</span>
+        <span class="keyword">new</span> Thread(() -&gt; System.out.println(<span class="string">"张三"</span>)).start();
+
+    }
+
+}
+</code></pre>
+<h2 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h2><blockquote>
+<p>引申出问题:我们使用线程的时候就去创建一个线程,这样实现起来非常简单,但就会出现一个问题,如果并发的线程数量很多,并且每个线程都是执行一个时间很短的任务就结束了,这样频繁创建线程就会大大降低系统的效率,因为频繁创建线程和销毁线程需要时间和资源,那么就有一种方法使得线程可以复用,就是执行完一个任务,并不被销毁,而是可以继续执行其他任务</p>
+<blockquote>
+<p>线程池:其实就是一个容纳多个线程的容器,其中的线程可以反复使用,省去了频繁创建线程对象的操作,无需反复创建线程或销毁线程而消耗过多资源其中Executor是跟接口  最主要的接口是ExecutorService接口  </p>
+</blockquote>
+</blockquote>
+<blockquote>
+<p>创建线程池的四种方式:  是Executors提供的<br>  &emsp;一: newCachedThreadPool创建一个可缓存线程池,如果线程池长度超过处理需要,可灵活回收空闲线程,如果无可回收,则新建线程<br>  &emsp;二: newFixedThreadPool 创建一个定长线程池,可控制线程最大并发数,超出的线程会在队列中等待<br>  &emsp;三: newScheduledThreadPool:创建一个定长线程池 支持定时及周期性任务执行<br>  &emsp;四:newSingleThreadExecutor:创建一个单线程化的线程池,它只会用唯一的工作线程来执行任务 保证所有任务按照指定顺序(FIFO,LIFO优先级)执行;</p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java%E5%B8%B8%E7%94%A8%E7%B1%BB%E5%AD%A6%E4%B9%A0/" rel="tag"><i class="fa fa-tag"></i> Java常用类学习</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/05/13/%E5%BC%82%E5%B8%B8%E4%BD%93%E7%B3%BB/" rel="next" title="异常体系">
+                <i class="fa fa-chevron-left"></i> 异常体系
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="卿恋佳人" />
+            
+              <p class="site-author-name" itemprop="name">卿恋佳人</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+            <a href="function split() { [native code] }"
+              
+                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#线程体系学习"><span class="nav-number">1.</span> <span class="nav-text">线程体系学习</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#并行与并发"><span class="nav-number">1.1.</span> <span class="nav-text">并行与并发:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程与线程"><span class="nav-number">1.2.</span> <span class="nav-text">进程与线程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程与线程的区别"><span class="nav-number">1.3.</span> <span class="nav-text">进程与线程的区别:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建线程的常用方式"><span class="nav-number">1.4.</span> <span class="nav-text">创建线程的常用方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#继承Thread类与实现Runnable接口区别"><span class="nav-number">1.5.</span> <span class="nav-text">继承Thread类与实现Runnable接口区别:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#start方法与run方法的区别"><span class="nav-number">1.6.</span> <span class="nav-text">start方法与run方法的区别:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程的状态"><span class="nav-number">1.7.</span> <span class="nav-text">线程的状态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sleep与wait区别"><span class="nav-number">1.8.</span> <span class="nav-text">sleep与wait区别:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#匿名内部类方式实现多线程"><span class="nav-number">1.9.</span> <span class="nav-text">匿名内部类方式实现多线程:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程池"><span class="nav-number">1.10.</span> <span class="nav-text">线程池</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">卿恋佳人</span>
+
+  
+</div>
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
