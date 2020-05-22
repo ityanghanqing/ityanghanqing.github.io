@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="JDBC有关学习," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="JDBC: JDBC概念: &amp;emsp;JDBC: Java DataBase Connectivity (Java数据库连接)JDBC是Java访问数据库的标准规范   &amp;emsp; 作用:用于执行SQL语句的Java API(Java语言通过JDBC可以操作数据库);   &amp;emsp;好处:&amp;emsp;&amp;emsp;1.我们只需要会调用JDBC接口中的方法即可,使用简单&amp;emsp;&amp;emsp;2">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JDBC学习总结">
+<meta property="og:url" content="http://yoursite.com/2020/05/22/JDBC%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:site_name" content="恋卿">
+<meta property="og:description" content="JDBC: JDBC概念: &amp;emsp;JDBC: Java DataBase Connectivity (Java数据库连接)JDBC是Java访问数据库的标准规范   &amp;emsp; 作用:用于执行SQL语句的Java API(Java语言通过JDBC可以操作数据库);   &amp;emsp;好处:&amp;emsp;&amp;emsp;1.我们只需要会调用JDBC接口中的方法即可,使用简单&amp;emsp;&amp;emsp;2">
+<meta property="article:published_time" content="2020-05-22T12:52:31.000Z">
+<meta property="article:modified_time" content="2020-05-22T13:30:52.811Z">
+<meta property="article:author" content="卿恋佳人">
+<meta property="article:tag" content="JDBC有关学习">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/05/22/JDBC学习总结/"/>
+
+
+
+
+
+  <title>JDBC学习总结 | 恋卿</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">恋卿</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">记录点滴</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/22/JDBC%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="卿恋佳人">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="恋卿">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">JDBC学习总结</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-22T20:52:31+08:00">
+                2020-05-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaSe/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaSe</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="JDBC"><a href="#JDBC" class="headerlink" title="JDBC:"></a>JDBC:</h1><hr>
+<h2 id="JDBC概念"><a href="#JDBC概念" class="headerlink" title="JDBC概念:"></a>JDBC概念:</h2><blockquote>
+<p>&emsp;JDBC: Java DataBase Connectivity (Java数据库连接)JDBC是Java访问数据库的标准规范  </p>
+<p>&emsp; 作用:用于执行SQL语句的Java API(Java语言通过JDBC可以操作数据库);  </p>
+<p>&emsp;好处:<br>&emsp;&emsp;1.我们只需要会调用JDBC接口中的方法即可,使用简单<br>&emsp;&emsp;2.使用同一套java代码,进行少量的修改就可以访问其他JDBC支持的数据库</p>
+</blockquote>
+<a id="more"></a>  
+
+<hr>
+<h2 id="JDBC使用步骤"><a href="#JDBC使用步骤" class="headerlink" title="JDBC使用步骤"></a>JDBC使用步骤</h2><blockquote>
+<p>&emsp;&emsp;JDBC的编程流程步骤:<br>1.导入相关jar包   直接在lib包下右击找到Add as Library 加载到当前环境  </p>
+<p>2.注册驱动(利用反射Class.forName(“”))  </p>
+<p>3.获取Connection连接对象  </p>
+<p>4.编写sql语句  </p>
+<p>5.执行sql语句  </p>
+<p>6.处理结果集  </p>
+<p>7.释放资源   </p>
+</blockquote>
+<hr>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.ityang;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span> Qing-俺物语·杨</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span> 2020/5/18 8:41</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Version</span> 1.0</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.sql.*;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> *     使用步骤:</span></span><br><span class="line"><span class="comment"> *          一:导包  java.sql:JDBC访问数据库的基础包,在javaSe中,如java.sql.Connection</span></span><br><span class="line"><span class="comment"> *                   javax.sql:JDBC访问数据库的扩展包</span></span><br><span class="line"><span class="comment"> *                   数据库的驱动: 各大数据库厂商来实现 有mysql的 也有oracle的  mysql的驱动是com.mysql.jdbc.Driver;</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> *      JDBC的四个核心对象:在java.sql包中</span></span><br><span class="line"><span class="comment"> *                          1.DriverManger:用于注册驱动的</span></span><br><span class="line"><span class="comment"> *                          2.Connection:表示与数据库创建的连接</span></span><br><span class="line"><span class="comment"> *                          3.Statement:执行Sql语句的对象</span></span><br><span class="line"><span class="comment"> *                          4.ResultSet:结果集或一张虚拟表</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JDBCTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="comment">//0.导入相关jar包  在模块中创建lib文件夹 将jar包放到lib文件夹中</span></span><br><span class="line">        <span class="comment">//1.注册驱动   将实现类加载到内存中</span></span><br><span class="line">        Class.forName(<span class="string">"com.mysql.jdbc.Driver"</span>);</span><br><span class="line">        <span class="comment">//2.获取连接</span></span><br><span class="line">        <span class="comment">/**  连接数据库的URL地址格式: 协议名:子协议://服务器名或IP地址:端口号/数据库名?参数=参数值</span></span><br><span class="line"><span class="comment">         * jdbc:mysql"//localhost:3306/94db1</span></span><br><span class="line"><span class="comment">         * 如果是本地服务器,端口号是默认的3306,则可以简写为jdbc:mysql:///94db1</span></span><br><span class="line"><span class="comment">         *</span></span><br><span class="line"><span class="comment">         * 注意:如果出现乱码需要加上参数:  ?characterEncoding=utf-8,表示让数据库以UTF-8编码来处理数据</span></span><br><span class="line"><span class="comment">         *     如:jdbc:mysql://localhost:3306/94db1?characterEncoding=utf-8</span></span><br><span class="line"><span class="comment">         * *</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        String url=<span class="string">"jdbc:mysql://localhost:3306/94db1"</span>;</span><br><span class="line">        String username=<span class="string">"root"</span>;</span><br><span class="line">        String password=<span class="string">"root"</span>;</span><br><span class="line">        Connection connection = DriverManager.getConnection(url, username, password);</span><br><span class="line">        <span class="comment">//3.编写sql语句</span></span><br><span class="line">        String sql = <span class="string">"select * from product"</span>;</span><br><span class="line">        <span class="comment">//4.创建语句执行者,小货车</span></span><br><span class="line">        Statement statement = connection.createStatement();</span><br><span class="line">        <span class="comment">//5.执行sql并返回结果集</span></span><br><span class="line">        ResultSet resultSet = statement.executeQuery(sql);</span><br><span class="line">        <span class="comment">//6.处理结果集</span></span><br><span class="line">        <span class="keyword">while</span> (resultSet.next()) &#123;</span><br><span class="line">            <span class="comment">//resultSet 中存到的是当前行的数据信息</span></span><br><span class="line">            <span class="comment">//通过类型和字段名称获取信息</span></span><br><span class="line">            <span class="keyword">int</span> id = resultSet.getInt(<span class="string">"id"</span>);</span><br><span class="line">            String pname = resultSet.getString(<span class="string">"pname"</span>);</span><br><span class="line">            <span class="keyword">double</span> price = resultSet.getDouble(<span class="string">"price"</span>);</span><br><span class="line">            System.out.println(id + <span class="string">":"</span> + pname + <span class="string">":"</span> + price);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//7.释放资源</span></span><br><span class="line">        resultSet.close();</span><br><span class="line">        statement.close();</span><br><span class="line">        connection.close();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="CRUDTest"><a href="#CRUDTest" class="headerlink" title="CRUDTest"></a>CRUDTest</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.ityang;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span> Qing-俺物语·杨</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span> 2020/5/18 21:04</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Version</span> 1.0</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.sql.Connection;</span><br><span class="line"><span class="keyword">import</span> java.sql.DriverManager;</span><br><span class="line"><span class="keyword">import</span> java.sql.Statement;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Statement的API介绍:</span></span><br><span class="line"><span class="comment"> *  boolean execute(String sql):可以执行任意sql语句,返回的是boolean值,表示是否返回ResultSet结果集,仅当执行select语句,且有返回结果时返回true,其他语句都返回false;</span></span><br><span class="line"><span class="comment"> *  int executeUpdate(String sql): 根据执行的DML(Insert Update Delete)语句,返回受影响的行数;</span></span><br><span class="line"><span class="comment"> *  ResultSet executeQuery(String sql):根据查询语句返回结果集,只能执行Select语句</span></span><br><span class="line"><span class="comment"> *   在mysql中只要不是查询就是修改,executeUpdate:用于执行增删改,executeQuery用于执行查询;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JdbcCrudTest</span> </span>&#123;</span><br><span class="line">    <span class="comment">//增删改查</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="comment">//注册驱动:</span></span><br><span class="line">        Class.forName(<span class="string">"com.mysql.jdbc.Driver"</span>);</span><br><span class="line">        <span class="comment">//获取连接</span></span><br><span class="line">        Connection conn = DriverManager.getConnection(<span class="string">"jdbc:mysql:///94db1"</span>, <span class="string">"root"</span>, <span class="string">"root"</span>);</span><br><span class="line">        <span class="comment">//创建语句执行者对象</span></span><br><span class="line">        Statement statement = conn.createStatement();</span><br><span class="line">        <span class="comment">//编写sql语句 插入</span></span><br><span class="line">        String sql =<span class="string">"insert into category (cname) values('手机');"</span>;</span><br><span class="line">        <span class="keyword">int</span> i = statement.executeUpdate(sql);</span><br><span class="line">        System.out.println(<span class="string">"影响的行数:"</span> + i);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//编写sql语句 修改</span></span><br><span class="line">        String sql1= <span class="string">"update category set cname='汽车'where cid=4;"</span>;</span><br><span class="line">        <span class="keyword">int</span> i1 = statement.executeUpdate(sql1);</span><br><span class="line">        System.out.println(<span class="string">"影响的行数:"</span> + i1);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//编写sql语句 删除记录</span></span><br><span class="line">          String sql2=<span class="string">"delete from category where cid = 1;"</span>;</span><br><span class="line">        <span class="keyword">int</span> i2 = statement.executeUpdate(sql2);</span><br><span class="line">        <span class="comment">//释放资源</span></span><br><span class="line">        statement.close();</span><br><span class="line">        conn.close();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="JDBCTransation"><a href="#JDBCTransation" class="headerlink" title="JDBCTransation"></a>JDBCTransation</h2><hr>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.ityang;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span> Qing-俺物语·杨</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span> 2020/5/19 10:16</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Version</span> 1.0</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.sql.Connection;</span><br><span class="line"><span class="keyword">import</span> java.sql.DriverManager;</span><br><span class="line"><span class="keyword">import</span> java.sql.SQLException;</span><br><span class="line"><span class="keyword">import</span> java.sql.Statement;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Connection接口中与事物有关的方法</span></span><br><span class="line"><span class="comment"> *   void setAutoCommit(boolean autoCommit) throws SQLException</span></span><br><span class="line"><span class="comment"> *     false :开启事物  true :关闭事物</span></span><br><span class="line"><span class="comment"> *  void commit():  提交事物</span></span><br><span class="line"><span class="comment"> *  void rollback(): 回滚事务</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> *    步骤:</span></span><br><span class="line"><span class="comment"> *      1.注册驱动</span></span><br><span class="line"><span class="comment"> *      2.获取连接</span></span><br><span class="line"><span class="comment"> *      3.获取到Statement对象</span></span><br><span class="line"><span class="comment"> *      4.开启事务</span></span><br><span class="line"><span class="comment"> *      5.使用Statement执行sql</span></span><br><span class="line"><span class="comment"> *      6.提交或者回滚事务</span></span><br><span class="line"><span class="comment"> *      7.关闭资源</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JDBCTransationTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Connection conn = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">//注册驱动 获取连接</span></span><br><span class="line">            Class.forName(<span class="string">"com.mysql.jdbc.Driver"</span>);</span><br><span class="line">            conn = DriverManager.getConnection(<span class="string">"jdbc:mysql:///94db1"</span>, <span class="string">"root"</span>, <span class="string">"root"</span>);</span><br><span class="line">            <span class="comment">//开启事务</span></span><br><span class="line">            conn.setAutoCommit(<span class="keyword">false</span>);</span><br><span class="line">            <span class="comment">//获取语句执行者</span></span><br><span class="line">            Statement statement = conn.createStatement();</span><br><span class="line">            <span class="comment">//张三 减500;</span></span><br><span class="line">            String sql = <span class="string">"update account set balance =balance-500 where id=1;"</span>;</span><br><span class="line">            statement.executeUpdate(sql);</span><br><span class="line">            <span class="comment">//模拟异常</span></span><br><span class="line">            <span class="comment">//int i = 10 /0;</span></span><br><span class="line">            <span class="comment">//李四加500;</span></span><br><span class="line">            sql =<span class="string">"update account set balance = balance + 500 where id=2;"</span>;</span><br><span class="line">            statement.executeUpdate(sql);</span><br><span class="line">            statement.close();</span><br><span class="line">            <span class="comment">//成功 提交事物</span></span><br><span class="line">            System.out.println(<span class="string">"成功,提交事物"</span>);</span><br><span class="line">            conn.commit();</span><br><span class="line"></span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="comment">//失败  回滚事务</span></span><br><span class="line">                System.out.println(<span class="string">"出现了异常,回滚事务"</span>);</span><br><span class="line">                conn.rollback();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (SQLException e1) &#123;</span><br><span class="line">                e1.printStackTrace();</span><br><span class="line">            &#125;<span class="keyword">finally</span> &#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    conn.close();</span><br><span class="line">                &#125; <span class="keyword">catch</span> (SQLException e1) &#123;</span><br><span class="line">                    e1.printStackTrace();</span><br><span class="line"></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="JDBCUtils"><a href="#JDBCUtils" class="headerlink" title="JDBCUtils"></a>JDBCUtils</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.ityang;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span> Qing-俺物语·杨</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span> 2020/5/19 11:18</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Version</span> 1.0</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.sql.*;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 我们你每次去执行sql语句都需要注册驱动,获取连接 ,得到Statement对象,以及释放资源,这是有很多重复的劳动,</span></span><br><span class="line"><span class="comment"> * 我们可以将重复的代码定义到某个类的方法中,直接调用方法,可以简化代码;</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * 编写JDBC工具类的步骤</span></span><br><span class="line"><span class="comment"> * 1.将固定字符创定义为常量</span></span><br><span class="line"><span class="comment"> * 2.在静态代码块中注册驱动(只注册一次)</span></span><br><span class="line"><span class="comment"> * 3.提供一个获取连接的方法 static Connection getConnection();</span></span><br><span class="line"><span class="comment"> * 4.定义关闭资源的方法close(Connection conn,Statement stmt,ResultSet rs)</span></span><br><span class="line"><span class="comment"> * 5.重载关闭方法close(Connection conn ,Statement stmt)</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JDBCUtils</span> </span>&#123;</span><br><span class="line">    <span class="comment">//将固定字符创定义为常量</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String DRIVER_CLASS = <span class="string">"com.mysql.jdbc.Driver"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String URL = <span class="string">"jdbc:mysql:///94db1"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String USER = <span class="string">"root"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String PASSWORD = <span class="string">"root"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//2.在静态代码块中注册驱动 只注册一次  当这个类加载到内存的时候就走这个静态代码块 再去触发Driver类中的静态代码块 主动注册</span></span><br><span class="line">    <span class="keyword">static</span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Class.forName(DRIVER_CLASS);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//3.提供一个获取连接的方法 static Connection getConnection();</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Connection <span class="title">getConnection</span><span class="params">()</span><span class="keyword">throws</span> SQLException</span>&#123;</span><br><span class="line">       Connection conn= DriverManager.getConnection(URL, USER,PASSWORD);</span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 也可以将四个参数抽取为jdbc.properties文件,通过Properties对象获取每个值</span></span><br><span class="line"><span class="comment">         * InputStream is = JDBCUtils.class.getResourceAsStream("/jdbc.properties");</span></span><br><span class="line"><span class="comment">         * Properties pp = new Properties();</span></span><br><span class="line"><span class="comment">         * pp.load(is);</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">       <span class="keyword">return</span> conn;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//4.定义关闭资源的方法close(Connection conn,Statement stmt,ResultSet rs)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">close</span><span class="params">(Connection conn, Statement stmt, ResultSet rs)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (rs!=<span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                rs.close();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (stmt!=<span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                stmt.close();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (conn!=<span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                conn.close();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//5.重载关闭方法close(Connection conn ,Statement stmt)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span>  <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">close</span><span class="params">(Connection conn,Statement stmt)</span></span>&#123;</span><br><span class="line">        close(conn, stmt, <span class="keyword">null</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="JDBCPreparedStatement"><a href="#JDBCPreparedStatement" class="headerlink" title="JDBCPreparedStatement"></a>JDBCPreparedStatement</h2><hr>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.ityang;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span> Qing-俺物语·杨</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span> 2020/5/20 10:35</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Version</span> 1.0</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.sql.Connection;</span><br><span class="line"><span class="keyword">import</span> java.sql.PreparedStatement;</span><br><span class="line"><span class="keyword">import</span> java.sql.ResultSet;</span><br><span class="line"><span class="keyword">import</span> java.sql.SQLException;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * SQL注入问题: 百度回答</span></span><br><span class="line"><span class="comment"> *    java.sql包中的PreparedStatement接口继承了Statement,在JDBC应用中,如果是稍有水平开发者,你应该始终以</span></span><br><span class="line"><span class="comment"> *    PreparedStatement代替Statement,也就是说,在任何时候都不要使用Statement;</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> *  如果使用Statement,那么就必须在SQL语句中,实际地去嵌入值,比如之前的insert语句,但是这种方式有一个弊端:</span></span><br><span class="line"><span class="comment"> *      第一,就是容易发生SQL注入, 简单来说就是提交内容的时候,可以使用'1 or 1',诸如此类的非法的字符,在后台,如果使用Statement,就会原封不动的将用户添写的内容拼接在SQL中,此时可能会发对数据库的意外的损坏,甚至数据泄露,这就叫SQL注入;</span></span><br><span class="line"><span class="comment"> *      第二,就是性能的低下,如果两条SQL语句的结构大同小异,但是如果使用Statement在MySQL中执行SQL语句的时候,却需要对每一条SQL语句都实现编译,编译的耗时在整个sql语句的执行时中占据了大部分的比例,所以,Statement会导致执行大量类似SQL语句的时候,性能低下;</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> *   使用PreparedStatement,就可以解决上述的问题(好处):</span></span><br><span class="line"><span class="comment"> *        1.使用PreparedStatement时,是可以在SQL语句中,对值所在的位置使用 ? 这种占位符的,使用占位符之后,实际的值,可以通过另外一份放在数组中的参数来代表,此时PreparedStatement会对值做特殊的处理,做了处理后,就会导致不法分子的恶意注入的sql代码失效;</span></span><br><span class="line"><span class="comment"> *        2.提示性能,使用PreparedStatement之后,其结构类似的sql语句,都变成一样的了,因为值的地方都会变成 ?  来占位,那么一条sql语句,在mysql中只会编译一次,后面的sql语句过来,就直接拿编译后的执行计划,加上不同的参数直接执行,可以大大提升性能;</span></span><br><span class="line"><span class="comment"> *     简单总结来说就是首先将sql语句发送给数据库预编译,PreparedStatement会引用着预编译后的结果,可以多次传入不同的参数给PreparedStatement对象并执行,减少sql编译次数,提高效率,安全性提高,提高了程序的可读性;</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * PreparedStatement的基本使用:</span></span><br><span class="line"><span class="comment"> *       1.获取PreparedStatement  在java.sql.Connection有获取PreparedStatement对象的方法</span></span><br><span class="line"><span class="comment"> *         PreparedStatement preparedStatement(String sql):会先将SQL语句发送给数据库预编译,PreparedStatement对象会引用预编译后的结果;</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> *       2.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JdbcPreparedStatement</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> SQLException </span>&#123;</span><br><span class="line">        <span class="comment">//获取连接</span></span><br><span class="line">        Connection connection = JDBCUtils.getConnection();</span><br><span class="line">        <span class="comment">//编写sql语句 未知内容使用? 占位</span></span><br><span class="line">        String sql = <span class="string">"select * from user where name=? and password=?;"</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//获取PreparedStatement对象</span></span><br><span class="line">        PreparedStatement pps = connection.prepareStatement(sql);</span><br><span class="line">        <span class="comment">//指定 ? 的值</span></span><br><span class="line">        pps.setString(<span class="number">1</span>,<span class="string">"admin"</span>);</span><br><span class="line">        ResultSet rs = pps.executeQuery();</span><br><span class="line">        <span class="keyword">if</span> (rs.next()) &#123;</span><br><span class="line">            String name = rs.getString(<span class="string">"name"</span>);</span><br><span class="line">            System.out.println(<span class="string">"name:"</span> + name);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">"没有找到数据..."</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        JDBCUtils.close(connection, pps, rs);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="DRUID"><a href="#DRUID" class="headerlink" title="DRUID"></a>DRUID</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.ityang.DruidTest;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span> Qing-俺物语·杨</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span> 2020/5/21 20:21</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Version</span> 1.0</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.alibaba.druid.pool.DruidDataSourceFactory;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.sql.DataSource;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStream;</span><br><span class="line"><span class="keyword">import</span> java.sql.Connection;</span><br><span class="line"><span class="keyword">import</span> java.sql.PreparedStatement;</span><br><span class="line"><span class="keyword">import</span> java.sql.ResultSet;</span><br><span class="line"><span class="keyword">import</span> java.util.Properties;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 连接池: 连接池是创建和管理数据库连接的缓冲池技术,连接池就是一个容器,连接池中保存了一些数据库连接,这些连接是可以重复使用的</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * 学习DRUID连接池:</span></span><br><span class="line"><span class="comment"> *        使用步骤:</span></span><br><span class="line"><span class="comment"> *          1.在src目录下创建一个properties文件,并设置对应的参数</span></span><br><span class="line"><span class="comment"> *          2.加载properties文件的内容到Properties对象中</span></span><br><span class="line"><span class="comment"> *          3.创建DRUID连接池,使用配置文件中的参数</span></span><br><span class="line"><span class="comment"> *          4.从DRUID连接池中取出连接</span></span><br><span class="line"><span class="comment"> *          5.执行sql语句</span></span><br><span class="line"><span class="comment"> *          6.关闭资源</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">druidTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="comment">//加载配置文件中的配置参数</span></span><br><span class="line">        InputStream is = druidTest.class.getResourceAsStream("/druid.properties");</span><br><span class="line">        Properties properties = <span class="keyword">new</span> Properties();</span><br><span class="line">        properties.load(is);</span><br><span class="line">        <span class="comment">//创建连接池 使用配置文件中的参数</span></span><br><span class="line">        DataSource ds = DruidDataSourceFactory.createDataSource(properties);</span><br><span class="line">        <span class="comment">//从连接池取出连接</span></span><br><span class="line">        Connection connection = ds.getConnection();</span><br><span class="line">        <span class="comment">//执行sql语句</span></span><br><span class="line">        String sql = <span class="string">"insert into student values (null,?,?,?);"</span>;</span><br><span class="line">        PreparedStatement preparedStatement = connection.prepareStatement(sql);</span><br><span class="line">       <span class="comment">/* preparedStatement.setString(1, "王五");</span></span><br><span class="line"><span class="comment">        preparedStatement.setInt(2, 35);</span></span><br><span class="line"><span class="comment">        preparedStatement.setDouble(3, 88.5);</span></span><br><span class="line"><span class="comment">        int i = preparedStatement.executeUpdate();</span></span><br><span class="line"><span class="comment">        System.out.println("影响的行数:" + i);</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">        <span class="comment">//执行查询</span></span><br><span class="line">        sql= <span class="string">"select * from student;"</span>;</span><br><span class="line">        ResultSet rs = preparedStatement.executeQuery(sql);</span><br><span class="line">        <span class="keyword">while</span> (rs.next()) &#123;</span><br><span class="line">            <span class="keyword">int</span> id = rs.getInt(<span class="string">"id"</span>);</span><br><span class="line">            String name = rs.getString(<span class="string">"name"</span>);</span><br><span class="line">            <span class="keyword">int</span> age = rs.getInt(<span class="string">"age"</span>);</span><br><span class="line">            <span class="keyword">double</span> score = rs.getDouble(<span class="string">"score"</span>);</span><br><span class="line">            System.out.println(<span class="string">"id:"</span> + id + <span class="string">", name"</span> + name + <span class="string">", age="</span> + age + <span class="string">",score= "</span> + score);</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        preparedStatement.close();</span><br><span class="line">        connection.close();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="DRUIDSourceUtils"><a href="#DRUIDSourceUtils" class="headerlink" title="DRUIDSourceUtils"></a>DRUIDSourceUtils</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.ityang.DruidTest;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span> Qing-俺物语·杨</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span> 2020/5/21 21:08</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Version</span> 1.0</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.alibaba.druid.pool.DruidDataSourceFactory;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.sql.DataSource;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStream;</span><br><span class="line"><span class="keyword">import</span> java.sql.Connection;</span><br><span class="line"><span class="keyword">import</span> java.sql.ResultSet;</span><br><span class="line"><span class="keyword">import</span> java.sql.SQLException;</span><br><span class="line"><span class="keyword">import</span> java.sql.Statement;</span><br><span class="line"><span class="keyword">import</span> java.util.Properties;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 我们每次操作数据库都需要创建连接池,获取连接池 ,关闭资源 等都是重复的代码 我们可以将创建连接池和获取连接池的代码</span></span><br><span class="line"><span class="comment"> * 放到一个工具类中,简化代码</span></span><br><span class="line"><span class="comment"> * 连接池工具类步骤:</span></span><br><span class="line"><span class="comment"> * 1.声明静态数据源成员变量</span></span><br><span class="line"><span class="comment"> * 2.创建连接池对象</span></span><br><span class="line"><span class="comment"> * 3.定义公有的得到数据源的方法</span></span><br><span class="line"><span class="comment"> * 4.定义得到连接对象的方法</span></span><br><span class="line"><span class="comment"> * 5.定义关闭资源的方法</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DateSourceUtils</span> </span>&#123;</span><br><span class="line">    <span class="comment">//1.声明静态数据源成员变量</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> DataSource ds;</span><br><span class="line">    <span class="comment">//2.创建连接池对象</span></span><br><span class="line">    <span class="keyword">static</span>&#123;</span><br><span class="line">        <span class="comment">//加载配置文件中的参数</span></span><br><span class="line">        InputStream is = DateSourceUtils.class.getClassLoader().getResourceAsStream("druid.properties");</span><br><span class="line">        Properties pp = <span class="keyword">new</span> Properties();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            pp.load(is);</span><br><span class="line">            <span class="comment">//创建连接池 使用配置文件中的参数</span></span><br><span class="line">             ds = DruidDataSourceFactory.createDataSource(pp);</span><br><span class="line"></span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//3.定义公有的得到数据源的方法</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> DataSource <span class="title">getDataSource</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> ds;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//4.定义得到连接对象的方法</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Connection <span class="title">getConnection</span><span class="params">()</span><span class="keyword">throws</span> SQLException</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> ds.getConnection();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//5.定义关闭资源的方法</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">close</span><span class="params">(Connection conn, Statement statement, ResultSet resultSet)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (resultSet != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                resultSet.close();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (statement != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                statement.close();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (conn != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                conn.close();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//6.重载关闭方法</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">close</span><span class="params">(Connection connection, Statement statement)</span> </span>&#123;</span><br><span class="line">        close(connection, statement, <span class="keyword">null</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JDBC%E6%9C%89%E5%85%B3%E5%AD%A6%E4%B9%A0/" rel="tag"><i class="fa fa-tag"></i> JDBC有关学习</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/05/17/%E6%9C%89%E5%85%B3IO%E6%B5%81%E5%AD%A6%E4%B9%A0/" rel="next" title="有关IO流学习">
+                <i class="fa fa-chevron-left"></i> 有关IO流学习
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="卿恋佳人" />
+            
+              <p class="site-author-name" itemprop="name">卿恋佳人</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+            <a href="function split() { [native code] }"
+              
+                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JDBC"><span class="nav-number">1.</span> <span class="nav-text">JDBC:</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#JDBC概念"><span class="nav-number">1.1.</span> <span class="nav-text">JDBC概念:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JDBC使用步骤"><span class="nav-number">1.2.</span> <span class="nav-text">JDBC使用步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CRUDTest"><span class="nav-number">1.3.</span> <span class="nav-text">CRUDTest</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JDBCTransation"><span class="nav-number">1.4.</span> <span class="nav-text">JDBCTransation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JDBCUtils"><span class="nav-number">1.5.</span> <span class="nav-text">JDBCUtils</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JDBCPreparedStatement"><span class="nav-number">1.6.</span> <span class="nav-text">JDBCPreparedStatement</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DRUID"><span class="nav-number">1.7.</span> <span class="nav-text">DRUID</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DRUIDSourceUtils"><span class="nav-number">1.8.</span> <span class="nav-text">DRUIDSourceUtils</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">卿恋佳人</span>
+
+  
+</div>
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
